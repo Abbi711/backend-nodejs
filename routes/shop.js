@@ -1,14 +1,12 @@
-const express = require('express')
-const path = require('path')
-const rootDir = require('../utils/path')
+const path = require('path');
+const express = require('express');
 
-const app = express()
-const router = express.Router()
+const rootDir = require('../util/path');
+const adminData = require('./admin');
+const productController = require('../controllers/products')
 
-// '/' includes all paths starting with / (i.e. every request ever)=> therefore defined last, like default case
-router.get('/', (req, res, next) => {
-    res.sendFile(path.join(rootDir, "views", "shop.html"));
-    //path join -> detects the os and builds path accordingly
-})
+const router = express.Router();
 
-module.exports = router
+router.get('/', productController.getProducts);
+
+module.exports = router;
